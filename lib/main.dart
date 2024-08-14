@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:flutter/material.dart';
 
@@ -33,6 +33,7 @@ class MyHomePageState extends State<MyHomePage>{
   TextEditingController inchcontroller=TextEditingController();
   num bmi=0;
   String health="";
+  Color backColor=Colors.white;
   @override
   Widget build(BuildContext context) {
  return Scaffold(
@@ -40,6 +41,7 @@ class MyHomePageState extends State<MyHomePage>{
      title: Text("BMI CALCULATOR",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w500,color: Colors.red.shade500),),
    ),
    body: Container(width: double.infinity,
+     color: backColor,
      height: 800,
      child: Column(mainAxisAlignment: MainAxisAlignment.center,
        crossAxisAlignment: CrossAxisAlignment.center,
@@ -103,20 +105,33 @@ class MyHomePageState extends State<MyHomePage>{
            bmi = num.parse((weight/(totalHeightInMeter*totalHeightInMeter)).toStringAsFixed(2));
            if(bmi<18){
              health="You are Underweight";
+             backColor=Colors.yellow.shade200;
+             setState(() {
+
+             });
            } else if (bmi>28){
              health=  "You are Overweight";
+             backColor=Colors.red.shade200;
+             setState(() {
+
+             });
              }
            else{
            health="You Are Healthy";
+           backColor=Colors.green.shade200;
            }
            setState(() {
-             
+
            });
 
          }, child: Text("Calculate BMI",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 25),)
          ),
          SizedBox(height: 30,),
-   Text("Your BMI Is $bmi , $health",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w500,color: Colors.orange),)
+   Container(color: Colors.white,
+     child: Padding(
+       padding: const EdgeInsets.all(14.0),
+       child: Text("Your BMI Is $bmi , $health",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500,color: Colors.orange),),
+     ))
        ],
      ),
    ),
